@@ -27,8 +27,14 @@ export function NavBar() {
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <Link to="/docs">
-              <NavigationMenuLink> About Us </NavigationMenuLink>
+            <Link to="/signup">
+              <NavigationMenuLink> Signup </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <Link to="/login">
+              <NavigationMenuLink> Login </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>

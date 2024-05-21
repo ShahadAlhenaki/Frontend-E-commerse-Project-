@@ -6,11 +6,21 @@ import "./App.css"
 import { createContext, useState } from "react"
 import { Product } from "./types"
 import { ProductDetails } from "./pages/productDetails"
+import { Login } from "./pages/login"
+import { Signup } from "./pages/signup"
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />
+  },
+  {
+    path: "/login",
+    element: <Login />
+  },
+  {
+    path: "/signup",
+    element: <Signup />
   },
   {
     path: "/dashboard",

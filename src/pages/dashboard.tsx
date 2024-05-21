@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table"
-import { Category, Product } from "@/types"
+import { Category, Product, User } from "@/types"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 
@@ -67,6 +67,21 @@ export function Dashboard() {
     }
   }
 
+  const getUsers = async () => {
+    try {
+      const token = localStorage.getItem("token")
+      const res = await api.get("/users", {
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
+      return res.data
+    } catch (error) {
+      console.error(error)
+      return Promise.reject(new Error("Something went wrong"))
+    }
+  }
+
   const deleteProduct = async (id: string) => {
     try {
       const res = await api.delete(`/products/${id}`)
@@ -89,9 +104,14 @@ export function Dashboard() {
     queryFn: getProducts
   })
 
-  const { data: categories, catError } = useQuery<Category[]>({
+  const { data: categories, error: catError } = useQuery<Category[]>({
     queryKey: ["categories"],
     queryFn: getCategories
+  })
+
+  const { data: users, error: userError } = useQuery<User[]>({
+    queryKey: ["users"],
+    queryFn: getUsers
   })
 
   const productWithCat = products?.map((product) => {
