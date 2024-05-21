@@ -37,25 +37,24 @@ export function Home() {
     }
   }
 
-  // Queries
   const { data, error } = useQuery<Product[]>({
     queryKey: ["products"],
     queryFn: getProducts
   })
 
-  // const onChange = (e) => {}
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
     setSearchBy(value)
-    setSearchParams({
-      ...searchParams,
-      searchBy: value
-    })
   }
   const handleSearch = (e: FormEvent) => {
     e.preventDefault()
-    queryClient.invalidateQueries({ queryKey: ["products"] })
+
+
+   queryClient.invalidateQueries({ queryKey: ["products"] })
+   setSearchParams({
+      ...searchParams,
+      searchBy: searchBy
+    })
   }
 
   return (
@@ -73,14 +72,6 @@ export function Home() {
           <Button type="submit">Search</Button>
         </form>
       </div>
-
-      {/* 
-        <select title="Product" name="products" onChange={onChange}>
-           { data?.map((product) => {
-            return <option key={product.id} value={product.id}>{product.name}</option>
-           })}
-        </select> */}
-
       <section className="flex flex-col md:flex-row gap-4 max-w-6xl mx-auto justify-between  flex-wrap">
         {data?.length === 0 && <p>No products found, try searching with other name </p>}
         {data?.map((product) => (
@@ -97,9 +88,7 @@ export function Home() {
               <Button variant="outline">
                 <Link to={`/products/${product.id}`}> Details </Link>
               </Button>
-              <Button className="w-full" onClick={() => handleAddToCart(product)}>
-                Add to cart
-              </Button>
+              <Button className="w-full" onClick={() => handleAddToCart(product)}>Add to cart</Button>
             </CardFooter>
           </Card>
         ))}
