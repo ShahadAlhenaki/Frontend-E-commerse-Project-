@@ -1,14 +1,15 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import { Home } from "./pages/home"
-import { Dashboard } from "./pages/dashboard"
-
 import "./App.css"
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { createContext, useEffect, useState } from "react"
 import { DecodedUser, Product } from "./types"
-import { ProductDetails } from "./pages/productDetails"
-import { Login } from "./pages/login"
-import { Signup } from "./pages/signup"
+
 import { PrivateRoute } from "./components/privateRoute"
+import { ProductDetails } from "./pages/productDetails"
+import { Dashboard } from "./pages/dashboard"
+import { Signup } from "./pages/signup"
+import { Login } from "./pages/login"
+import { Home } from "./pages/home"
 
 const router = createBrowserRouter([
   {
@@ -25,10 +26,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element:(
-    <PrivateRoute> 
-      <Dashboard />
-    </PrivateRoute>
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
     )
   },
   {
@@ -42,7 +43,6 @@ type GlobalContextType = {
   handleAddToCart: (product: Product) => void
   handleDeleteFromCart: (id: string) => void
   handleStoreUser: (user: DecodedUser) => void
-
 }
 
 type GlobalState = {
@@ -68,7 +68,6 @@ function App() {
       })
     }
   }, [])
-
 
   const handleAddToCart = (product: Product) => {
     const isDuplicated = state.cart.find((cartItem) => cartItem.id === product.id)
@@ -98,16 +97,17 @@ function App() {
   return (
     <div className="App">
       <GlobalContext.Provider
-       value={{ 
-        state,
-        handleAddToCart,
-        handleDeleteFromCart,
-        handleStoreUser}}>
+        value={{
+          state,
+          handleAddToCart,
+          handleDeleteFromCart,
+          handleStoreUser
+        }}
+      >
         <RouterProvider router={router} />
       </GlobalContext.Provider>
     </div>
   )
 }
-
 
 export default App

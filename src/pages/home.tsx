@@ -1,4 +1,10 @@
 import api from "@/api"
+
+import { GlobalContext } from "@/App"
+import { Product } from "@/types"
+
+import { NavBar } from "@/components/navbar"
+import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -8,12 +14,9 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card"
-import { Product } from "@/types"
+
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { ChangeEvent, FormEvent, useContext, useState } from "react"
-import { GlobalContext } from "@/App"
-import { NavBar } from "@/components/navbar"
-import { Input } from "@/components/ui/input"
 import { Link, useSearchParams } from "react-router-dom"
 
 export function Home() {
@@ -49,9 +52,8 @@ export function Home() {
   const handleSearch = (e: FormEvent) => {
     e.preventDefault()
 
-
-   queryClient.invalidateQueries({ queryKey: ["products"] })
-   setSearchParams({
+    queryClient.invalidateQueries({ queryKey: ["products"] })
+    setSearchParams({
       ...searchParams,
       searchBy: searchBy
     })
@@ -88,7 +90,9 @@ export function Home() {
               <Button variant="outline">
                 <Link to={`/products/${product.id}`}> Details </Link>
               </Button>
-              <Button className="w-full" onClick={() => handleAddToCart(product)}>Add to cart</Button>
+              <Button className="w-full" onClick={() => handleAddToCart(product)}>
+                Add to cart
+              </Button>
             </CardFooter>
           </Card>
         ))}

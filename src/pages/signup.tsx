@@ -8,11 +8,11 @@ export function Signup() {
   const navigate = useNavigate()
 
   const [user, setUser] = useState({
-    fullName:"",
-    email:"",
-    password:"",
-    countryCode:"",
-    phone:""
+    fullName: "",
+    email: "",
+    password: "",
+    countryCode: "",
+    phone: ""
   })
 
   const handleSignup = async () => {
@@ -29,24 +29,24 @@ export function Signup() {
     const { name, value } = e.target
 
     setUser({
-        ...user,
-        [name]:value
+      ...user,
+      [name]: value
     })
   }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-   const response = await handleSignup()
-   if(response){
-    navigate('/login')
-   }
+    const response = await handleSignup()
+    if (response) {
+      navigate("/login")
+    }
   }
 
   return (
     <div>
       <h3>Signup</h3>
       <form action="POST" onSubmit={handleSubmit} className="w-full md:w-1/3 mx-auto">
-      <Input
+        <Input
           name="fullName"
           className="mt-4"
           type="text"

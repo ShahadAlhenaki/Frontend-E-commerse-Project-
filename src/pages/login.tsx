@@ -1,8 +1,10 @@
 import api from "@/api"
 import jwt from "jwt-decode"
 import { GlobalContext } from "@/App"
-import { Button } from "@/components/ui/button"
+
 import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+
 import { ChangeEvent, FormEvent, useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { reshapeUser } from "@/lib/utils"
@@ -29,29 +31,29 @@ export function Login() {
     }
   }
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => { 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
     setUser({
-        ...user,
-        [name]:value
+      ...user,
+      [name]: value
     })
   }
-  
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
- const token =  await handleLogin()
- if(token){
- const decodedToken = jwt(token)
- const user = reshapeUser(decodedToken)
- localStorage.setItem("token", token)
- localStorage.setItem("user", JSON.stringify(user))
+    const token = await handleLogin()
+    if (token) {
+      const decodedToken = jwt(token)
+      const user = reshapeUser(decodedToken)
+      localStorage.setItem("token", token)
+      localStorage.setItem("user", JSON.stringify(user))
 
- handleStoreUser(user)
- navigate("/")
- }
-}
+      handleStoreUser(user)
+      navigate("/")
+    }
+  }
 
   return (
     <div>
