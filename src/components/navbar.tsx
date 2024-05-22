@@ -6,8 +6,17 @@ import {
   NavigationMenuList
 } from "./ui/navigation-menu"
 import { Cart } from "./cart"
+import { useContext } from "react"
+import { GlobalContext } from "@/App"
+import { ROLE } from "@/types"
 
 export function NavBar() {
+  const context = useContext(GlobalContext)
+  if (!context) throw Error("Context is missing")
+  const { state, handleRemoveUser } = context
+
+  console.log(state)
+
   return (
     <div className="flex justify-between mb-20">
       <h3>Logo</h3>
@@ -20,23 +29,29 @@ export function NavBar() {
             </Link>
           </NavigationMenuItem>
 
-          <NavigationMenuItem>
-            <Link to="/dashboard">
-              <NavigationMenuLink> Dashboard </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
+          {state.user?.role === ROLE.Admin && (
+            <NavigationMenuItem>
+              <Link to="/dashboard">
+                <NavigationMenuLink> Dashboard </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          )}
 
-          <NavigationMenuItem>
-            <Link to="/signup">
-              <NavigationMenuLink> Signup </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
+          {!state.user && (
+            <NavigationMenuItem>
+              <Link to="/signup">
+                <NavigationMenuLink> Signup </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          )}
 
-          <NavigationMenuItem>
-            <Link to="/login">
-              <NavigationMenuLink> Login </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
+          {!state.user && (
+            <NavigationMenuItem>
+              <Link to="/login">
+                <NavigationMenuLink> Login </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          )}
         </NavigationMenuList>
       </NavigationMenu>
 

@@ -17,6 +17,7 @@ import { useState } from "react"
 
 export function Dashboard() {
   const queryClient = useQueryClient()
+  
 
   const [product, setProduct] = useState({
     name: "",
@@ -34,7 +35,6 @@ export function Dashboard() {
   }
   const handleChange = (e) => {
     const { name, value } = e.target
-    console.log("{name, value}", { name, value })
     setProduct({
       ...product,
       [name]: value
@@ -93,7 +93,6 @@ export function Dashboard() {
   }
 
   const handleDeleteProduct = async (id: string) => {
-    console.log("id:", id)
     await deleteProduct(id)
     queryClient.invalidateQueries({ queryKey: ["products"] })
   }
