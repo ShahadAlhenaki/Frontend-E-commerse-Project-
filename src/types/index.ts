@@ -1,10 +1,31 @@
 export type Product = {
   id: string
   name: string
-  // price:
   description: string
   image: string
   categoryId: string
+  stockId: string
+  quantity : number
+  price : number
+  color : string
+  size : string
+}
+export type ProductCreate = Pick<Product, 'name' | 'description' | 'image' | 'categoryId'>
+export type ProductWithCat = Product & { categoryName: string}
+
+export type stockCreate = Pick<Stock, 'quantity'| 'price' | 'color' | 'size' | 'productId'>
+export type StockWithpro = Stock & { productName: string}
+
+
+
+
+export type Stock = {
+id: string
+productId : string 
+quantity : number
+price : number
+color : string
+ size : string
 }
 
 export type Category = {

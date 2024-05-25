@@ -15,23 +15,26 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table"
-import { Category, Product, User } from "@/types"
+import { Category, Product, ProductCreate, ProductWithCat, User } from "@/types"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
+import { StockDash } from "./StockDash"
 
 export function Dashboard() {
   const queryClient = useQueryClient()
 
-  const [product, setProduct] = useState({
+  const [product, setProduct] = useState<ProductCreate>({
     name: "",
-    categoryId: ""
+    categoryId: "",
+    description: "",
+    image: ""
   })
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value, valueAsNumber } = e.target
     setProduct({
       ...product,
-      [name]: value
+      [name]: name == "price" ? valueAsNumber : value
     })
   }
 
@@ -40,6 +43,7 @@ export function Dashboard() {
     await ProductService.createOne(product)
     queryClient.invalidateQueries({ queryKey: ["products"] })
   }
+  console.log("Product ", product)
 
   const getUsers = async () => {
     try {
@@ -79,15 +83,15 @@ export function Dashboard() {
     queryFn: getUsers
   })
 
-  const productWithCat = products?.map((product) => {
+  const productWithCat: ProductWithCat[] | undefined = products?.map((product) => {
     const category = categories?.find((cat) => cat.id === product.categoryId)
     if (category) {
       return {
         ...product,
-        categoryId: category.name
+        categoryName: category.name
       }
     }
-    return product
+    return { ...product, categoryName: "" }
   })
 
   const handleSelect = (e) => {
@@ -100,7 +104,7 @@ export function Dashboard() {
   return (
     <>
       <NavBar />
-      <form className="mt-20 w-1/3 mx-auto" onChange={handleSubmit}>
+      <form className="mt-20 w-1/3 mx-auto" onSubmit={handleSubmit}>
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">Add new product</h3>
         <Input
           name="name"
@@ -109,8 +113,23 @@ export function Dashboard() {
           placeholder="Name"
           onChange={handleChange}
         />
+        <Input
+          name="description"
+          className="mt-4"
+          type="text"
+          placeholder="Description"
+          onChange={handleChange}
+        />
 
-        <select name="cats" onChange={handleSelect}>
+        <Input
+          name="image"
+          className="mt-4"
+          type="text"
+          placeholder="Img"
+          onChange={handleChange}
+        />
+
+        <select name="cats" onChange={handleSelect} className="mt-4 bg-gray-200">
           {categories?.map((cat) => {
             return (
               <option key={cat.id} value={cat.id}>
@@ -133,10 +152,10 @@ export function Dashboard() {
       <div>
         <h3 className="scroll-m-20 text-4xl my-10 font-semibold tracking-tight">Products</h3>
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-gray-50">
             <TableRow>
               <TableHead>Name</TableHead>
-              {/* <TableHead>Price</TableHead> */}
+              <TableHead>Price</TableHead>
               <TableHead>CategoryId</TableHead>
               <TableHead>Img</TableHead>
               <TableHead>Actions</TableHead>
@@ -146,8 +165,11 @@ export function Dashboard() {
             {productWithCat?.map((product) => (
               <TableRow key={product.id}>
                 <TableCell className="text-left">{product.name}</TableCell>
-                <TableCell className="text-left">{product.categoryId}</TableCell>
-                <TableCell className="text-left">{product.image}</TableCell>
+                <TableCell className="text-left">{product.price}</TableCell>
+                <TableCell className="text-left">{product.categoryName}</TableCell>
+                <TableCell className="text-left">
+                  <img className=" w-16" src={product.image} />
+                </TableCell>
                 <TableCell className="text-left">
                   <Button onClick={() => handleDeleteProduct(product.id)}>X</Button>
                   <EditDialog product={product} />
@@ -157,6 +179,8 @@ export function Dashboard() {
           </TableBody>
         </Table>
       </div>
+
+      <StockDash />
     </>
   )
 }

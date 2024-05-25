@@ -35,7 +35,8 @@ export function ProductDetails() {
   return (
     <>
       <NavBar />
-      <div>
+      <div className="flex flex-col mx-auto ">
+        <img className="w-15 h-15" src={product.image}/>
         <h3>{product.name}</h3>
         <p>{product.description}</p>
       </div>

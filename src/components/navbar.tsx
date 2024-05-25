@@ -9,6 +9,7 @@ import { Cart } from "./cart"
 import { useContext } from "react"
 import { GlobalContext } from "@/App"
 import { ROLE } from "@/types"
+import { Button } from "./ui/button"
 
 export function NavBar() {
   const context = useContext(GlobalContext)
@@ -17,9 +18,20 @@ export function NavBar() {
 
   console.log(state)
 
+  const handleLogout = () => {
+    if (typeof window !== undefined) {
+      window.location.reload()
+    }
+
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
+
+    handleRemoveUser()
+  }
+  // bg-gray-100
   return (
-    <div className="flex justify-between mb-20">
-      <h3>Logo</h3>
+    <div className="flex justify-between mb-10 py-9 bg-yellow-50 w-full h-16">
+      <img className="h-16 w-19 self-center " src="public/carDeals.png" />
 
       <NavigationMenu>
         <NavigationMenuList className="gap-4">
@@ -51,6 +63,11 @@ export function NavBar() {
                 <NavigationMenuLink> Login </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
+          )}
+          {state.user && (
+            <Button variant="outline" onClick={handleLogout}>
+              Logout
+            </Button>
           )}
         </NavigationMenuList>
       </NavigationMenu>

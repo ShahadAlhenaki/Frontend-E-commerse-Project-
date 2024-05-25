@@ -18,6 +18,8 @@ import {
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { ChangeEvent, FormEvent, useContext, useState } from "react"
 import { Link, useSearchParams } from "react-router-dom"
+import { Footer } from "@/components/footer"
+import { Hero } from "@/components/hero"
 
 export function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -63,6 +65,8 @@ export function Home() {
     <>
       <NavBar />
 
+      <Hero />
+
       <div>
         <form onSubmit={handleSearch} className="flex gap-4 w-full md:w-1/2 mx-auto mb-10">
           <Input
@@ -74,10 +78,10 @@ export function Home() {
           <Button type="submit">Search</Button>
         </form>
       </div>
-      <section className="flex flex-col md:flex-row gap-4 max-w-6xl mx-auto justify-between  flex-wrap">
+      <section className="flex flex-col md:flex-row gap-4 max-w-6xl mx-auto justify-between  flex-wrap mb-9">
         {data?.length === 0 && <p>No products found, try searching with other name </p>}
         {data?.map((product) => (
-          <Card key={product.id} className="w-[300px]">
+          <Card key={product.id} className="w-[300px] hover:bg-yellow-50 group-hover:opacity-95 ">
             <CardHeader>
               <img src={product.image} />
               <CardTitle>{product.name}</CardTitle>
@@ -98,6 +102,8 @@ export function Home() {
         ))}
       </section>
       {error && <p className="text-red-500">{error.message}</p>}
+
+      <Footer />
     </>
   )
 }

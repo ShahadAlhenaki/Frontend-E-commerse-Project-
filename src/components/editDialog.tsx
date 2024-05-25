@@ -24,7 +24,7 @@ export function EditDialog({ product }: { product: Product }) {
       const res = await api.patch(`/products/${updatedProduct.id}`, updatedProduct)
       return res.data
     } catch (error) {
-      console.error(error)
+      // console.error(error)
       return Promise.reject(new Error("Something went wrong"))
     }
   }
@@ -63,6 +63,24 @@ export function EditDialog({ product }: { product: Product }) {
             <Input
               id="name"
               defaultValue={updatedProduct.name}
+              className="col-span-3"
+              onChange={handleChange}
+            />
+            <Label htmlFor="name" className="text-right">
+            Description
+            </Label>
+            <Input
+              id="description"
+              defaultValue={updatedProduct.description}
+              className="col-span-3"
+              onChange={handleChange}
+            />
+            <Label htmlFor="name" className="text-right">
+              Img
+            </Label>
+              <Input
+              id="image"
+              defaultValue={updatedProduct.image}
               className="col-span-3"
               onChange={handleChange}
             />
