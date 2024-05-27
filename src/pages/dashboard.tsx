@@ -168,7 +168,7 @@ export function Dashboard() {
                 <TableCell className="text-left">{product.price}</TableCell>
                 <TableCell className="text-left">{product.categoryName}</TableCell>
                 <TableCell className="text-left">
-                  <img className=" w-16" src={product.image} />
+                  <img className="w-16" src={product.image} />
                 </TableCell>
                 <TableCell className="text-left">
                   <Button onClick={() => handleDeleteProduct(product.id)}>X</Button>

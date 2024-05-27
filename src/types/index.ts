@@ -22,7 +22,7 @@ export type StockWithpro = Stock & { productName: string}
 export type Stock = {
 id: string
 productId : string 
-quantity : number
+stockQuantity : number
 price : number
 color : string
  size : string

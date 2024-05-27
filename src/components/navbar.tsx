@@ -28,23 +28,23 @@ export function NavBar() {
 
     handleRemoveUser()
   }
-  // bg-gray-100
+  // bg-gray-20
   return (
-    <div className="flex justify-between mb-10 py-9 bg-yellow-50 w-full h-16">
+    <div className="flex justify-between py-9  0 w-full h-16 bg-gradient-to-r from-gray-300 to-white-50">
       <img className="h-16 w-19 self-center " src="public/carDeals.png" />
 
       <NavigationMenu>
         <NavigationMenuList className="gap-4">
           <NavigationMenuItem>
             <Link to="/">
-              <NavigationMenuLink> Home </NavigationMenuLink>
+              <NavigationMenuLink className="hover:underline underline-offset-8 decoration-orange-400"> Home </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
 
           {state.user?.role === ROLE.Admin && (
             <NavigationMenuItem>
               <Link to="/dashboard">
-                <NavigationMenuLink> Dashboard </NavigationMenuLink>
+                <NavigationMenuLink className="hover:underline underline-offset-8 decoration-orange-400"> Dashboard </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
           )}
@@ -52,7 +52,7 @@ export function NavBar() {
           {!state.user && (
             <NavigationMenuItem>
               <Link to="/signup">
-                <NavigationMenuLink> Signup </NavigationMenuLink>
+                <NavigationMenuLink className="hover:underline underline-offset-8 decoration-orange-400"> Signup </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
           )}
@@ -60,7 +60,7 @@ export function NavBar() {
           {!state.user && (
             <NavigationMenuItem>
               <Link to="/login">
-                <NavigationMenuLink> Login </NavigationMenuLink>
+                <NavigationMenuLink className="hover:underline underline-offset-8 decoration-orange-400"> Login </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
           )}

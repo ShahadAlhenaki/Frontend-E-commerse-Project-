@@ -71,7 +71,7 @@ export function Home() {
         <form onSubmit={handleSearch} className="flex gap-4 w-full md:w-1/2 mx-auto mb-10">
           <Input
             type="search"
-            placeholder="Search for a product"
+            placeholder="Search for a car . . ."
             onChange={handleChange}
             value={searchBy}
           />
@@ -81,22 +81,23 @@ export function Home() {
       <section className="flex flex-col md:flex-row gap-4 max-w-6xl mx-auto justify-between  flex-wrap mb-9">
         {data?.length === 0 && <p>No products found, try searching with other name </p>}
         {data?.map((product) => (
-          <Card key={product.id} className="w-[300px] hover:bg-yellow-50 group-hover:opacity-95 ">
-            <CardHeader>
+          <Card key={product.id} className="w-[300px] hover:bg-yellow-50 group-hover:opacity-95 justify-evenly">
+            <CardHeader className="">
               <img src={product.image} />
               <CardTitle>{product.name}</CardTitle>
               <CardDescription>{product.description}</CardDescription>
             </CardHeader>
-            {/* <CardContent>
-                <p>Card Content Here</p>
-              </CardContent> */}
+            <CardContent>
+            {product.price}<span className=" ml-2">| SAR</span>
+              </CardContent>
             <CardFooter className="flex justify-between">
               <Button variant="outline">
                 <Link to={`/products/${product.id}`}> Details </Link>
               </Button>
-              <Button className="w-full" onClick={() => handleAddToCart(product)}>
+              <Button className="w-full ml-3" onClick={() => handleAddToCart(product)}>
                 Add to cart
               </Button>
+            
             </CardFooter>
           </Card>
         ))}

@@ -114,7 +114,7 @@ export function StockDash() {
           name="name"
           className="mt-4"
           type="text"
-          placeholder="Name"
+          placeholder="name"
           onChange={handleChange}
         /> */}
         <Input
@@ -171,7 +171,7 @@ export function StockDash() {
         <Table>
           <TableHeader className="bg-gray-50">
             <TableRow>
-              {/* <TableHead>Name</TableHead> */}
+              <TableHead>Name</TableHead>
               <TableHead>quantity</TableHead>
               <TableHead>price</TableHead>
               <TableHead>color</TableHead>
@@ -181,8 +181,8 @@ export function StockDash() {
           <TableBody>
             {stockWithpro?.map((stock) => (
               <TableRow key={stock.id}>
-                {/* <TableCell className="text-left">{stock.productName}</TableCell> */}
-                <TableCell className="text-left">{stock.quantity}</TableCell>
+                <TableCell className="text-left">{stock.productName}</TableCell>
+                <TableCell className="text-left">{stock.stockQuantity}</TableCell>
                 <TableCell className="text-left">{stock.price}</TableCell>
                 <TableCell className="text-left">{stock.color}</TableCell>
                 <TableCell className="text-left">{stock.size}</TableCell>
