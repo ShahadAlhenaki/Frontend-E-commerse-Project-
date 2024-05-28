@@ -20,6 +20,7 @@ import { ChangeEvent, FormEvent, useContext, useState } from "react"
 import { Link, useSearchParams } from "react-router-dom"
 import { Footer } from "@/components/footer"
 import { Hero } from "@/components/hero"
+import { SearchIcon } from "lucide-react"
 
 export function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -85,17 +86,18 @@ const uniqueProducts = data?.filter(product=> {
             onChange={handleChange}
             value={searchBy}
           />
-          <Button type="submit">Search</Button>
+          {/* <Button type="submit">Search</Button> */}
+          <Button type="submit"><SearchIcon>Search</SearchIcon></Button>
         </form>
       </div>
-      <section className="flex flex-col md:flex-row gap-11 max-w-6xl justify-center mx-auto flex-wrap mb-9">
+      <section className="flex flex-col md:flex-row gap-11 max-w-6xl justify-center mx-auto flex-wrap mb-11">
         {uniqueProducts?.length === 0 && <p>No products found, try searching with other name </p>}
         {uniqueProducts?.map((product) => (
-          <Card key={product.id} className="w-[300px] hover:bg-yellow-50 group-hover:opacity-95 justify-evenly">
-            <CardHeader className="">
-              <img src={product.image} />
+          <Card key={product.id} className="w-[300px] hover:bg-yellow-50 group-hover:opacity-95 justify-evenly border-b-4">
+            <CardHeader>
+              <img className=" w-64 h-28  mb-6" src={product.image} />
               <CardTitle>{product.name}</CardTitle>
-              <CardDescription>{product.description}</CardDescription>
+              <CardDescription className="h-14">{product.description.slice(0, 55)}...</CardDescription>
             </CardHeader>
             <CardContent>
             {product.price}<span className=" ml-2">| SAR</span>
@@ -104,10 +106,13 @@ const uniqueProducts = data?.filter(product=> {
               <Button variant="outline">
                 <Link to={`/products/${product.id}`}> Details </Link>
               </Button>
-              <Button className="w-full ml-3 shadow-lg" onClick={() => handleAddToCart(product)}>
+              {
+                 product.quantity ? (
+              <Button className="w-full ml-3 shadow-lg rounded-full" onClick={() => handleAddToCart(product)}>
                 Add to cart
-              </Button>
-            
+              </Button>)
+               : <p className=" text-s text-red-600">Out of stock</p>
+            }
             </CardFooter>
           </Card>
         ))}

@@ -31,8 +31,9 @@ export function NavBar() {
   // bg-gray-20
   return (
     <div className="flex justify-between py-9  0 w-full h-16 bg-gradient-to-r from-gray-300 to-white-50">
-      <img className="h-16 w-19 self-center" src="public/carDeals.png" />
-
+      <Link className="self-center" to="/">
+      <img className="h-16 w-19" src="public/carDeals.png" alt="Logo"/>
+      </Link>
       <NavigationMenu>
         <NavigationMenuList className="gap-4">
           <NavigationMenuItem>

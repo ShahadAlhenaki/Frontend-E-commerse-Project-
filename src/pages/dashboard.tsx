@@ -179,6 +179,7 @@ const uniqueProducts = productWithCat?.filter(product=> {
                 <TableCell className="text-left">{product.name}</TableCell>
                 <TableCell className="text-left">{product.price}</TableCell>
                 <TableCell className="text-left">{product.categoryName}</TableCell>
+
                 <TableCell className="text-left">
                   <img className="w-16" src={product.image} />
                 </TableCell>
