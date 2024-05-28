@@ -9,7 +9,6 @@ import api from "@/api"
 
 type OrderItem = {
   color: string
-  size: string
   quantity: number
   productId: string
 }
@@ -34,12 +33,6 @@ export function Cart() {
     return acc + curr.price
   }, 0)
 
-  /*{
-    "productId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    "color": "string",
-    "size": "string",
-    "quantity": 0
-  } */
   const checkoutOrder = []
   console.log(groups)
   Object.keys(groups).forEach((key) => {
@@ -48,8 +41,7 @@ export function Cart() {
 
     checkoutOrder.push({
       color: product.color,
-      size: product.size,
-      quantity: product.quantity,
+      quantity: product.stockQuantity,
       productId: key
     })
   })

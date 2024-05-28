@@ -5,11 +5,12 @@ import { createContext, useEffect, useState } from "react"
 import { DecodedUser, Product } from "./types"
 
 import { PrivateRoute } from "./components/privateRoute"
-import { ProductDetails } from "./pages/productDetails"
+//import { ProductDetails } from "./pages/productDetails"
 import { Dashboard } from "./pages/dashboard"
 import { Signup } from "./pages/signup"
 import { Login } from "./pages/login"
 import { Home } from "./pages/home"
+import ProductDet from "./pages/productDet"
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/products/:productId",
-    element: <ProductDetails />
+    element: <ProductDet />
   }
 ])
 

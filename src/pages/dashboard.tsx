@@ -94,12 +94,23 @@ export function Dashboard() {
     return { ...product, categoryName: "" }
   })
 
+  
+
   const handleSelect = (e) => {
     setProduct({
       ...product,
       categoryId: e.target.value
     })
   }
+const uniqeMap: {[key: string]: boolean} = {}
+
+const uniqueProducts = productWithCat?.filter(product=> {
+  if(!uniqeMap[product.id]){
+    uniqeMap[product.id] = true
+    return true
+  }
+  return false
+})
 
   return (
     <>
@@ -130,6 +141,7 @@ export function Dashboard() {
         />
 
         <select name="cats" onChange={handleSelect} className="mt-4 bg-gray-200">
+      <option selected>Select Category</option>
           {categories?.map((cat) => {
             return (
               <option key={cat.id} value={cat.id}>
@@ -162,7 +174,7 @@ export function Dashboard() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {productWithCat?.map((product) => (
+            {uniqueProducts?.map((product) => (
               <TableRow key={product.id}>
                 <TableCell className="text-left">{product.name}</TableCell>
                 <TableCell className="text-left">{product.price}</TableCell>

@@ -61,10 +61,20 @@ export function Home() {
     })
   }
 
+
+const uniqeMap: {[key: string]: boolean} = {}
+
+const uniqueProducts = data?.filter(product=> {
+  if(!uniqeMap[product.id]){
+    uniqeMap[product.id] = true
+    return true
+  }
+  return false
+})
+
   return (
     <>
       <NavBar />
-
       <Hero />
 
       <div>
@@ -78,9 +88,9 @@ export function Home() {
           <Button type="submit">Search</Button>
         </form>
       </div>
-      <section className="flex flex-col md:flex-row gap-4 max-w-6xl mx-auto justify-between  flex-wrap mb-9">
-        {data?.length === 0 && <p>No products found, try searching with other name </p>}
-        {data?.map((product) => (
+      <section className="flex flex-col md:flex-row gap-11 max-w-6xl justify-center mx-auto flex-wrap mb-9">
+        {uniqueProducts?.length === 0 && <p>No products found, try searching with other name </p>}
+        {uniqueProducts?.map((product) => (
           <Card key={product.id} className="w-[300px] hover:bg-yellow-50 group-hover:opacity-95 justify-evenly">
             <CardHeader className="">
               <img src={product.image} />
@@ -94,7 +104,7 @@ export function Home() {
               <Button variant="outline">
                 <Link to={`/products/${product.id}`}> Details </Link>
               </Button>
-              <Button className="w-full ml-3" onClick={() => handleAddToCart(product)}>
+              <Button className="w-full ml-3 shadow-lg" onClick={() => handleAddToCart(product)}>
                 Add to cart
               </Button>
             

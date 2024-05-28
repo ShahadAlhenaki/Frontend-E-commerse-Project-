@@ -24,10 +24,9 @@ export function StockDash() {
 
   const [stock, setStock] = useState<stockCreate>({
     productId: "",
-    quantity: 0,
+    stockQuantity: 0,
     price: 0,
-    color: "",
-    size: ""
+    color: ""
   })
 
   const handleChange = (e) => {
@@ -90,10 +89,12 @@ export function StockDash() {
 
   const stockWithpro: StockWithpro[] | undefined = stocks?.map((stock) => {
     const product = products?.find((pro) => pro.id === stock.productId)
+    const category = categories?.find((cat) => cat.id === product.categoryId)
     if (product) {
       return {
         ...stock,
-        productName: product.name
+        productName: product.name,
+        productCategory: category.name
       }
     }
     return { ...stock, productName: "" }
@@ -110,15 +111,8 @@ export function StockDash() {
     <>
       <form className="mt-20 w-1/3 mx-auto" onSubmit={handleSubmit}>
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">Add new Stock</h3>
-        {/* <Input
-          name="name"
-          className="mt-4"
-          type="text"
-          placeholder="name"
-          onChange={handleChange}
-        /> */}
         <Input
-          name="quantity"
+          name="stockQuantity"
           className="mt-4"
           type="number"
           placeholder="quantity"
@@ -139,14 +133,15 @@ export function StockDash() {
           onChange={handleChange}
         />
         <Input
-          name="size"
+          name="productCategory"
           className="mt-4"
           type="text"
-          placeholder="size"
+          placeholder="Category"
           onChange={handleChange}
         />
 
         <select name="pros" onChange={handleSelect} className="mt-4 bg-gray-200">
+          <option selected>Select Product</option>
           {products?.map((pro) => {
             return (
               <option key={pro.id} value={pro.id}>
@@ -175,7 +170,7 @@ export function StockDash() {
               <TableHead>quantity</TableHead>
               <TableHead>price</TableHead>
               <TableHead>color</TableHead>
-              <TableHead>size</TableHead>
+              <TableHead>Category</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -185,7 +180,7 @@ export function StockDash() {
                 <TableCell className="text-left">{stock.stockQuantity}</TableCell>
                 <TableCell className="text-left">{stock.price}</TableCell>
                 <TableCell className="text-left">{stock.color}</TableCell>
-                <TableCell className="text-left">{stock.size}</TableCell>
+                <TableCell className="text-left">{stock.productCategory}</TableCell>
 
                 <TableCell className="text-left">
                   <Button onClick={() => handleDeleteStock(stock.id)}>X</Button>
