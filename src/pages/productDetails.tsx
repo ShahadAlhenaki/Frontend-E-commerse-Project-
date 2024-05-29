@@ -16,8 +16,12 @@ export function ProductDetails() {
 
   const getProduct = async () => {
     try {
-      const res = await api.get(`/products/${params.productId}`)
-      return res.data
+      const res = await api.get(`/products`)
+      if (res.data){
+        const products = res.data as Product
+        return products.find(product => product.id === params.productId)
+      }
+        return res.data
     } catch (error) {
       console.error(error)
       return Promise.reject(new Error("Something went wrong"))
@@ -47,8 +51,8 @@ export function ProductDetails() {
   return (
     <>
       <NavBar />
- 
-      <div className="flex flex-col mx-auto items-center self-center mt-20 mb-20 border-t-yellow-400 border border-solid border-b-yellow-400 p-14">
+
+      <div className="flex flex-col mx-auto items-center self-center mt-20 mb-20 border-orange-400 border border-solid border-b-orange-400 p-14">
         <h3 className="mb-8 text-3xl font-bold">{product.name}</h3>
         <img className="w-80 mb-8" src={product.image}/>
         <p className="mb-6 w-1/2 text-left">{product.description}</p>

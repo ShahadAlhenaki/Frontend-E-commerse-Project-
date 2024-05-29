@@ -3,7 +3,8 @@
    margin: 0 auto;
   padding: 0.1rem;
   text-align: center;
-  background-color: rgb(251, 249, 249);
+  background-color: rgb(15, 14, 14);
+  /* background-color: rgb(251, 249, 249); */
 }
 .logo {
   height: 6em;

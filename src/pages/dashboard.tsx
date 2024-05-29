@@ -94,29 +94,29 @@ export function Dashboard() {
     return { ...product, categoryName: "" }
   })
 
-  
-
   const handleSelect = (e) => {
     setProduct({
       ...product,
       categoryId: e.target.value
     })
   }
-const uniqeMap: {[key: string]: boolean} = {}
+  const uniqeMap: { [key: string]: boolean } = {}
 
-const uniqueProducts = productWithCat?.filter(product=> {
-  if(!uniqeMap[product.id]){
-    uniqeMap[product.id] = true
-    return true
-  }
-  return false
-})
+  const uniqueProducts = productWithCat?.filter((product) => {
+    if (!uniqeMap[product.id]) {
+      uniqeMap[product.id] = true
+      return true
+    }
+    return false
+  })
 
   return (
     <>
       <NavBar />
       <form className="mt-20 w-1/3 mx-auto" onSubmit={handleSubmit}>
-        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">Add new product</h3>
+        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight text-[#e99042]">
+          Add new product
+        </h3>
         <Input
           name="name"
           className="mt-4"
@@ -141,7 +141,7 @@ const uniqueProducts = productWithCat?.filter(product=> {
         />
 
         <select name="cats" onChange={handleSelect} className="mt-4 bg-gray-200">
-      <option selected>Select Category</option>
+          <option selected>Select Category</option>
           {categories?.map((cat) => {
             return (
               <option key={cat.id} value={cat.id}>
@@ -162,9 +162,11 @@ const uniqueProducts = productWithCat?.filter(product=> {
       </form>
 
       <div>
-        <h3 className="scroll-m-20 text-4xl my-10 font-semibold tracking-tight">Products</h3>
-        <Table>
-          <TableHeader className="bg-gray-50">
+        <h3 className="scroll-m-20 text-4xl my-10 font-semibold tracking-tight text-[#e99042]">
+          Products
+        </h3>
+        <Table className="w-2/3 mx-auto border-1 border-[#d8d6d6] border-collapse bg-[#eeeeeee9] ">
+          <TableHeader className="bg-[#eeeeeee9]">
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Price</TableHead>
@@ -179,12 +181,13 @@ const uniqueProducts = productWithCat?.filter(product=> {
                 <TableCell className="text-left">{product.name}</TableCell>
                 <TableCell className="text-left">{product.price}</TableCell>
                 <TableCell className="text-left">{product.categoryName}</TableCell>
-
                 <TableCell className="text-left">
                   <img className="w-16" src={product.image} />
                 </TableCell>
                 <TableCell className="text-left">
-                  <Button onClick={() => handleDeleteProduct(product.id)}>X</Button>
+                  <Button variant="destructive" onClick={() => handleDeleteProduct(product.id)}>
+                    X
+                  </Button>
                   <EditDialog product={product} />
                 </TableCell>
               </TableRow>

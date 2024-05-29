@@ -110,7 +110,9 @@ export function StockDash() {
   return (
     <>
       <form className="mt-20 w-1/3 mx-auto" onSubmit={handleSubmit}>
-        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">Add new Stock</h3>
+        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight text-[#e99042]">
+          Add new Stock
+        </h3>
         <Input
           name="stockQuantity"
           className="mt-4"
@@ -152,7 +154,7 @@ export function StockDash() {
         </select>
 
         <div className="flex justify-between">
-          <Button className="mt-4 bg-red-400" type="submit">
+          <Button className="mt-4 bg-[#d8987c]" type="submit">
             Submit
           </Button>
           <Button variant="outline" className="mt-4" type="reset">
@@ -162,15 +164,18 @@ export function StockDash() {
       </form>
 
       <div>
-        <h3 className="scroll-m-20 text-4xl my-10 font-semibold tracking-tight">Stocks</h3>
-        <Table>
-          <TableHeader className="bg-gray-50">
+        <h3 className="scroll-m-20 text-4xl my-10 font-semibold tracking-tight text-[#e99042] ">
+          Stocks
+        </h3>
+        <Table className="w-2/3 mx-auto border-1 bg-[#eeeeeee9] border-[#d8d6d6] border-collapse">
+          <TableHeader className="bg-[#eeeeeee9]">
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>quantity</TableHead>
               <TableHead>price</TableHead>
               <TableHead>color</TableHead>
               <TableHead>Category</TableHead>
+              <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -183,7 +188,9 @@ export function StockDash() {
                 <TableCell className="text-left">{stock.productCategory}</TableCell>
 
                 <TableCell className="text-left">
-                  <Button onClick={() => handleDeleteStock(stock.id)}>X</Button>
+                  <Button variant="destructive" onClick={() => handleDeleteStock(stock.id)}>
+                    X
+                  </Button>
                   {/* <EditDialog stock={stock} /> */}
                 </TableCell>
               </TableRow>
