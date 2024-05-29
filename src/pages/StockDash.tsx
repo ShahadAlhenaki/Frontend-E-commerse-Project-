@@ -109,6 +109,7 @@ export function StockDash() {
 
   return (
     <>
+      <p className="border border-t-blue-50 mt-20"></p>
       <form className="mt-20 w-1/3 mx-auto" onSubmit={handleSubmit}>
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight text-[#e99042]">
           Add new Stock
