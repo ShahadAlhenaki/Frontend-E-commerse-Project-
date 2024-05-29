@@ -26,7 +26,7 @@ export function Footer() {
             <Linkedin className="h-5 w-5" />
             <span className="sr-only">LinkedIn</span>
           </Link>
-          <Link className="text-gray-500 hover:hover:text-gray-800 dark:text-gray-400" to="#">
+          <Link className="text-gray-500 hover:hover:text-gray-800 dark:text-gray-400" to="https://github.com/ShahadAlhenaki">
             <GithubIcon className="h-5 w-5" />
             <span className="sr-only">GitHup</span>
           </Link>
