@@ -2,9 +2,9 @@ import { Link } from "react-router-dom"
 
 export function Hero() {
   return (
-    <section className=" w-full h-[80vh] flex items-center justify-center bg-gray-100 mb-9 bg-[url('public/2.png')] bg-cover">
+    <section className=" w-full h-[80vh] flex items-center justify-center bg-gray-100 mb-9 bg-[url('public/images/2.png')] bg-cover">
       <div className="relative z-10 text-center space-y-6 px-4 md:px-6 mt-40">
-        <h1 className="text-4xl tracking-tight sm:text-5xl md:text-6xl text-slate-50 font-semibold font-serif">
+        <h1 className="text-4xl tracking-tight sm:text-5xl md:text-6xl  text-slate-50 font-semibold font-serif">
           Welcome To CarDeals
         </h1>
         <p className="text-lg text-orange-300 max-w-3xl mx-auto font-light font-serif">

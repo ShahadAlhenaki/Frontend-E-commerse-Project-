@@ -86,7 +86,6 @@ const uniqueProducts = data?.filter(product=> {
             onChange={handleChange}
             value={searchBy}
           />
-          {/* <Button type="submit">Search</Button> */}
           <Button type="submit"><SearchIcon>Search</SearchIcon></Button>
         </form>
       </div>
